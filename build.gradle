@@ -1,0 +1,47 @@
+group 'ru.nektodev.abcourses'
+version '0.0.1-SNAPSHOT'
+
+apply plugin: 'spring-boot'
+
+buildscript {
+	ext {
+		springBootVersion = '1.4.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+jar {
+	baseName = 'abcourses'
+	version = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+	compile project(':facade')
+}
+
+allprojects {
+	apply plugin: 'java'
+	apply plugin: 'idea'
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+		compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+		compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+		compile group: 'com.github.briandilley.jsonrpc4j', name: 'jsonrpc4j', version: '1.4.6'
+
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+}

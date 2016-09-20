@@ -1,0 +1,3 @@
+rootProject.name = 'abcourses-backend'
+include 'api'
+include 'facade'
