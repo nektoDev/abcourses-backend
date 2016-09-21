@@ -40,7 +40,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
         long duration = finishTime - Long.valueOf(String.valueOf(request.getAttribute(START_TIME_ATTRIBUTE)));
         String uuid = String.valueOf(request.getAttribute(UUID_ATTRIBUTE));
 
-        LOG.info(String.format("[%s] Outgoing response: %dms", uuid, duration));
+        LOG.info(String.format("[%s] Outgoing response: [%s] %dms", uuid, response.getStatus(), duration));
 
         super.postHandle(request, response, handler, modelAndView);
     }

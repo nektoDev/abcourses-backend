@@ -2,6 +2,5 @@ group 'ru.nektodev.abcourses'
 version '0.0.1-SNAPSHOT'
 
 dependencies {
-    compile project(":api")
-    compile project(":service")
+    compile project(":model")
 }
