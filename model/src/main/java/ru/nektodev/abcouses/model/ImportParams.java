@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class ImportParams implements Serializable {
     private String publicKey;
+    private String homeworkPath;
     private String vocabularyPath;
     private String pronunciationPath;
     private String progressPath;
@@ -18,6 +19,7 @@ public class ImportParams implements Serializable {
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("publicKey", publicKey)
+                .add("homeworkPath", homeworkPath)
                 .add("vocabularyPath", vocabularyPath)
                 .add("pronunciationPath", pronunciationPath)
                 .add("progressPath", progressPath)
@@ -30,6 +32,7 @@ public class ImportParams implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         ImportParams that = (ImportParams) o;
         return Objects.equal(publicKey, that.publicKey) &&
+                Objects.equal(homeworkPath, that.homeworkPath) &&
                 Objects.equal(vocabularyPath, that.vocabularyPath) &&
                 Objects.equal(pronunciationPath, that.pronunciationPath) &&
                 Objects.equal(progressPath, that.progressPath);
@@ -37,7 +40,7 @@ public class ImportParams implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(publicKey, vocabularyPath, pronunciationPath, progressPath);
+        return Objects.hashCode(publicKey, homeworkPath, vocabularyPath, pronunciationPath, progressPath);
     }
 
     public String getPublicKey() {
@@ -71,5 +74,25 @@ public class ImportParams implements Serializable {
 
     public void setProgressPath(String progressPath) {
         this.progressPath = progressPath;
+    }
+
+    public String getHomeworkPath() {
+        return homeworkPath;
+    }
+
+    public void setHomeworkPath(String homeworkPath) {
+        this.homeworkPath = homeworkPath;
+    }
+
+    public String getAbsoluteVocabularyPath() {
+        return homeworkPath+vocabularyPath;
+    }
+
+    public String getAbsolutePronunciationPath() {
+        return homeworkPath+pronunciationPath;
+    }
+
+    public String getAbsoluteProgressPath() {
+        return homeworkPath+progressPath;
     }
 }
