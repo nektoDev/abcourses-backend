@@ -16,6 +16,16 @@ public class HomeworkWord implements Serializable {
     private String answer;
     private String wordId;
 
+    public HomeworkWord() {
+    }
+
+    public HomeworkWord(Integer id, String question, String answer, String wordId) {
+        this.id = id;
+        this.question = question;
+        this.answer = answer;
+        this.wordId = wordId;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)

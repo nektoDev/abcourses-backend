@@ -4,10 +4,7 @@ import com.google.common.base.Objects;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author nektodev
@@ -35,7 +32,10 @@ public class Word implements Serializable {
         this.lastUsed.put(student, date);
 
         this.countUses = new HashMap<>();
-        this.countUses.put(student, 1);
+        this.countUses.put(student, 0);
+
+        this.pronunciations = new HashMap<>();
+        this.translations = new HashSet<>();
     }
 
     public Word(String student, String id) {

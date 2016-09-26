@@ -8,4 +8,6 @@ import ru.nektodev.abcouses.model.Homework;
  * @date 21/09/2016
  */
 public interface HomeworkRepository extends MongoRepository<Homework, String> {
+
+    public Homework findByFileHashAndStudentId(String fileHash, String studentId);
 }

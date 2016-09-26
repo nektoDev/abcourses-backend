@@ -38,4 +38,9 @@ public class StudentService {
     public List<Student> list() {
         return studentRepository.findAll();
     }
+
+    public Student save(Student student) {
+        LOG.debug("Save student: " + student);
+        return studentRepository.save(student);
+    }
 }
