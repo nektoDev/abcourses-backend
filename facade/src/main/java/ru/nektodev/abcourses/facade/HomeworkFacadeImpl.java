@@ -4,6 +4,7 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.api.HomeworkFacade;
+import ru.nektodev.abcourses.api.model.HomeworkResponse;
 import ru.nektodev.abcourses.service.HomeworkService;
 import ru.nektodev.abcouses.model.Homework;
 
@@ -53,5 +54,29 @@ public class HomeworkFacadeImpl implements HomeworkFacade {
     @Override
     public Homework getStudentHomework(String studentId, Long date) {
         return homeworkService.getStudentHomework(studentId, new Date(date));
+    }
+
+    @Override
+    public HomeworkResponse getVocabulary(String studentId) {
+        Homework studentHomework = homeworkService.getStudentHomework(studentId, null);
+        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getVocabulary());
+    }
+
+    @Override
+    public HomeworkResponse getVocabulary(String studentId, Long date) {
+        Homework studentHomework = homeworkService.getStudentHomework(studentId, new Date(date));
+        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getVocabulary());
+    }
+
+    @Override
+    public HomeworkResponse getPronunciation(String studentId) {
+        Homework studentHomework = homeworkService.getStudentHomework(studentId, null);
+        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getPronunciation());
+    }
+
+    @Override
+    public HomeworkResponse getPronunciation(String studentId, Long date) {
+        Homework studentHomework = homeworkService.getStudentHomework(studentId, new Date(date));
+        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getPronunciation());
     }
 }

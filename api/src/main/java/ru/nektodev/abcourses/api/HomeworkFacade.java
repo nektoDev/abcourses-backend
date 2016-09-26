@@ -1,6 +1,7 @@
 package ru.nektodev.abcourses.api;
 
 import com.googlecode.jsonrpc4j.JsonRpcService;
+import ru.nektodev.abcourses.api.model.HomeworkResponse;
 import ru.nektodev.abcouses.model.Homework;
 
 import java.util.List;
@@ -29,4 +30,12 @@ public interface HomeworkFacade extends BaseFacade<Homework> {
     Homework getStudentHomework(String studentId);
 
     Homework getStudentHomework(String studentId, Long date);
+
+    HomeworkResponse getVocabulary(String studentId);
+
+    HomeworkResponse getVocabulary(String studentId, Long date);
+
+    HomeworkResponse getPronunciation(String studentId);
+
+    HomeworkResponse getPronunciation(String studentId, Long date);
 }
