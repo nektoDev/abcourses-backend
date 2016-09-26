@@ -39,4 +39,9 @@ public class StudentFacadeImpl implements StudentFacade {
     public List<Student> save(List<Student> students) {
         return studentService.save(students);
     }
+
+    @Override
+    public void delete(List<String> students) {
+        studentService.delete(students);
+    }
 }

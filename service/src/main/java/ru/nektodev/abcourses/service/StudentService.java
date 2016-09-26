@@ -43,4 +43,8 @@ public class StudentService {
         LOG.debug("Save student: " + student);
         return studentRepository.save(student);
     }
+
+    public void delete(List<String> students) {
+        students.forEach(s -> studentRepository.delete(s));
+    }
 }

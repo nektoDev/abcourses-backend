@@ -15,4 +15,6 @@ public interface BaseFacade<T> {
     List<T> merge(List<T> tList);
 
     List<T> save(List<T> tList);
+
+    void delete(List<String> tList);
 }

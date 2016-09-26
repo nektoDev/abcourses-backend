@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.importer.HomeworkParser;
-import ru.nektodev.abcouses.model.ParsedProgressData;
 import ru.nektodev.abcourses.importer.ProgressParserFactory;
 import ru.nektodev.abcourses.importer.YandexDownloader;
 import ru.nektodev.abcourses.utils.FileUtils;

@@ -23,4 +23,7 @@ public interface StudentFacade extends BaseFacade<Student> {
 
     @Override
     List<Student> save(List<Student> students);
+
+    @Override
+    void delete(List<String> students);
 }
