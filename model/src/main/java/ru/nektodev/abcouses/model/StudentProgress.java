@@ -20,6 +20,9 @@ public class StudentProgress implements Serializable {
     private List<ProgressData> test;
     private Date updateDate;
 
+    public StudentProgress() {
+    }
+
     public StudentProgress(String studentId, List<ProgressData> vocabulary, List<ProgressData> pronunciation, List<ProgressData> test, Date updateDate) {
         this.studentId = studentId;
         this.vocabulary = vocabulary;

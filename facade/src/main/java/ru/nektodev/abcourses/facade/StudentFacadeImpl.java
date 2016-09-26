@@ -4,8 +4,10 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.api.StudentFacade;
+import ru.nektodev.abcourses.service.ProgressService;
 import ru.nektodev.abcourses.service.StudentService;
 import ru.nektodev.abcouses.model.Student;
+import ru.nektodev.abcouses.model.StudentProgress;
 
 import java.util.List;
 
@@ -19,6 +21,9 @@ public class StudentFacadeImpl implements StudentFacade {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ProgressService progressService;
 
     @Override
     public Student get(String id) {
@@ -43,5 +48,10 @@ public class StudentFacadeImpl implements StudentFacade {
     @Override
     public void delete(List<String> students) {
         studentService.delete(students);
+    }
+
+    @Override
+    public StudentProgress getProgress(String student) {
+        return progressService.get(student);
     }
 }
