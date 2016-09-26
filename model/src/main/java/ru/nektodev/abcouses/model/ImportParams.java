@@ -13,7 +13,7 @@ public class ImportParams implements Serializable {
     private String homeworkPath;
     private String vocabularyPath;
     private String pronunciationPath;
-    private String progressPath;
+    private ProgressImportParams progressImportParams;
 
     @Override
     public String toString() {
@@ -22,7 +22,7 @@ public class ImportParams implements Serializable {
                 .add("homeworkPath", homeworkPath)
                 .add("vocabularyPath", vocabularyPath)
                 .add("pronunciationPath", pronunciationPath)
-                .add("progressPath", progressPath)
+                .add("progressImportParams", progressImportParams)
                 .toString();
     }
 
@@ -35,12 +35,12 @@ public class ImportParams implements Serializable {
                 Objects.equal(homeworkPath, that.homeworkPath) &&
                 Objects.equal(vocabularyPath, that.vocabularyPath) &&
                 Objects.equal(pronunciationPath, that.pronunciationPath) &&
-                Objects.equal(progressPath, that.progressPath);
+                Objects.equal(progressImportParams, that.progressImportParams);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(publicKey, homeworkPath, vocabularyPath, pronunciationPath, progressPath);
+        return Objects.hashCode(publicKey, homeworkPath, vocabularyPath, pronunciationPath, progressImportParams);
     }
 
     public String getPublicKey() {
@@ -68,12 +68,12 @@ public class ImportParams implements Serializable {
         this.pronunciationPath = pronunciationPath;
     }
 
-    public String getProgressPath() {
-        return progressPath;
+    public ProgressImportParams getProgressImportParams() {
+        return progressImportParams;
     }
 
-    public void setProgressPath(String progressPath) {
-        this.progressPath = progressPath;
+    public void setProgressImportParams(ProgressImportParams progressImportParams) {
+        this.progressImportParams = progressImportParams;
     }
 
     public String getHomeworkPath() {
@@ -90,9 +90,5 @@ public class ImportParams implements Serializable {
 
     public String getAbsolutePronunciationPath() {
         return homeworkPath+pronunciationPath;
-    }
-
-    public String getAbsoluteProgressPath() {
-        return homeworkPath+progressPath;
     }
 }

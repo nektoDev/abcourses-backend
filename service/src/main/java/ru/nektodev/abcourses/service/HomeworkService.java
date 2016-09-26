@@ -3,7 +3,7 @@ package ru.nektodev.abcourses.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.nektodev.abcourses.HomeworkRepository;
+import ru.nektodev.abcourses.repository.HomeworkRepository;
 import ru.nektodev.abcouses.model.Homework;
 
 import java.util.List;

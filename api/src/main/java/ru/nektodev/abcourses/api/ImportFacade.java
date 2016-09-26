@@ -9,6 +9,9 @@ import com.googlecode.jsonrpc4j.JsonRpcService;
 
 @JsonRpcService("/import")
 public interface ImportFacade {
-    void doImport();
-    void doImport(String student);
+    void doImportHomework();
+    void doImportHomework(String student);
+
+    void doImportProgress();
+    void doImportProgress(String student);
 }

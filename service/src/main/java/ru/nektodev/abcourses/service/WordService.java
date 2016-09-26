@@ -3,7 +3,7 @@ package ru.nektodev.abcourses.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.nektodev.abcourses.WordRepository;
+import ru.nektodev.abcourses.repository.WordRepository;
 import ru.nektodev.abcouses.model.Word;
 
 import java.util.List;

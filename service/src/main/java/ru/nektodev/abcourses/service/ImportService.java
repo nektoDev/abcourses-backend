@@ -5,12 +5,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.importer.HomeworkParser;
+import ru.nektodev.abcouses.model.ParsedProgressData;
+import ru.nektodev.abcourses.importer.ProgressParserFactory;
 import ru.nektodev.abcourses.importer.YandexDownloader;
 import ru.nektodev.abcourses.utils.FileUtils;
-import ru.nektodev.abcouses.model.Homework;
-import ru.nektodev.abcouses.model.HomeworkWord;
-import ru.nektodev.abcouses.model.Student;
-import ru.nektodev.abcouses.model.Word;
+import ru.nektodev.abcouses.model.*;
 import ru.nektodev.abcouses.model.exception.NoSuchStudentException;
 
 import java.io.File;
@@ -40,17 +39,23 @@ public class ImportService {
     private HomeworkService homeworkService;
 
     @Autowired
+    private ProgressService progressService;
+
+    @Autowired
     private YandexDownloader downloader;
+
+    private final ProgressParserFactory parserFactory;
+
+    public ImportService() {
+        parserFactory = new ProgressParserFactory();
+    }
 
     public void doImport() {
         studentService.list().forEach(s -> doImport(s.getId()));
     }
 
     public void doImport(String studentId) {
-        Student student = studentService.get(studentId);
-        if (student == null) {
-            throw new NoSuchStudentException("No student with id = " + studentId + " was found.");
-        }
+        Student student = getStudent(studentId);
 
         try {
             File zipHomeworkDirectory = downloader.downloadFile(student.getImportParams().getPublicKey(), student.getImportParams().getHomeworkPath());
@@ -77,6 +82,35 @@ public class ImportService {
             LOG.error(e);
             e.printStackTrace();
         }
+    }
+
+    public void doImportProgress() {
+        studentService.list().forEach(s -> doImportProgress(s.getId()));
+    }
+
+    public void doImportProgress(String studentId) {
+        Student student = getStudent(studentId);
+        try {
+            ProgressImportParams progressImportParams = student.getImportParams().getProgressImportParams();
+            File progressFile = downloader.downloadFile(student.getImportParams().getPublicKey(),
+                    progressImportParams.getProgressPath());
+
+            ParsedProgressData parsedProgressData = this.parserFactory.getParser(progressImportParams).doParse(progressFile);
+            StudentProgress studentProgress = new StudentProgress(student.getId(), parsedProgressData, new Date());
+
+            progressService.save(studentProgress);
+        } catch (IOException | ServerException e) {
+            LOG.error("Cannot import progress for student: " + student.getId(), e);
+            e.printStackTrace();
+        }
+    }
+
+    private Student getStudent(String studentId) {
+        Student student = studentService.get(studentId);
+        if (student == null) {
+            throw new NoSuchStudentException("No student with id = " + studentId + " was found.");
+        }
+        return student;
     }
 
     private List<HomeworkWord> importPronunciation(Student student, File pronunciationFile) throws IOException {

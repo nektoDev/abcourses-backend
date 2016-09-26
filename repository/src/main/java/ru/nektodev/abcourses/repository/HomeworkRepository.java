@@ -1,4 +1,4 @@
-package ru.nektodev.abcourses;
+package ru.nektodev.abcourses.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import ru.nektodev.abcouses.model.Homework;

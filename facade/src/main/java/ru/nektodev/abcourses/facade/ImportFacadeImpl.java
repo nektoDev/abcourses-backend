@@ -18,12 +18,22 @@ public class ImportFacadeImpl implements ImportFacade {
     private ImportService importService;
 
     @Override
-    public void doImport() {
+    public void doImportHomework() {
         importService.doImport();
     }
 
     @Override
-    public void doImport(String student) {
+    public void doImportHomework(String student) {
         importService.doImport(student);
+    }
+
+    @Override
+    public void doImportProgress() {
+        importService.doImportProgress();
+    }
+
+    @Override
+    public void doImportProgress(String student) {
+        importService.doImportProgress(student);
     }
 }
