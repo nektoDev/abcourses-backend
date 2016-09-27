@@ -30,8 +30,8 @@ docker {
     name "nektodev/abcources"
     tags 'latest', "v${ZoltuGitVersioning.versionInfo}"
     dockerfile 'Dockerfile'
-    dependsOn tasks.jar
-    files "build/libs/abcourses-${ZoltuGitVersioning.versionInfo}.jar"
+    dependsOn tasks.clean, tasks.jar
+    files "build/libs/"
     pull true
 }
 
