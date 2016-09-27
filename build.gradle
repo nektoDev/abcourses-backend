@@ -27,7 +27,7 @@ jar {
 }
 
 docker {
-    name "nektodev/abcources"
+    name "nektodev/abcourses"
     tags 'latest', "v${ZoltuGitVersioning.versionInfo}"
     dockerfile 'Dockerfile'
     dependsOn tasks.clean, tasks.jar
