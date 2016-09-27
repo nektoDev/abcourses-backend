@@ -22,6 +22,7 @@ jar {
 
 dependencies {
 	compile project(':facade')
+	compile project(':scheduler')
 }
 
 allprojects {
