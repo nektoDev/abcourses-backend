@@ -2,47 +2,52 @@ group 'ru.nektodev.abcourses'
 version '0.0.1-SNAPSHOT'
 
 apply plugin: 'spring-boot'
+apply plugin: "com.zoltu.git-versioning"
 
 buildscript {
-	ext {
-		springBootVersion = '1.4.0.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '1.4.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.zoltu.gradle.plugin:git-versioning:2.0.28"
+    }
 }
 
 jar {
-	baseName = 'abcourses'
-	version = '0.0.1-SNAPSHOT'
+    baseName = 'abcourses'
+    version = '0.0.1-SNAPSHOT'
 }
 
 dependencies {
-	compile project(':facade')
-	compile project(':scheduler')
+    compile project(':facade')
+    compile project(':scheduler')
 }
 
 allprojects {
-	apply plugin: 'java'
-	apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'idea'
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-		compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
-		compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
-		compile group: 'com.github.briandilley.jsonrpc4j', name: 'jsonrpc4j', version: '1.4.6'
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+        compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+        compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+        compile group: 'com.github.briandilley.jsonrpc4j', name: 'jsonrpc4j', version: '1.4.6'
 
-		testCompile('org.springframework.boot:spring-boot-starter-test')
-	}
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
 
 }
