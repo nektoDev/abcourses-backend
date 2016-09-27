@@ -1,8 +1,8 @@
 group 'ru.nektodev.abcourses'
-version '0.0.1-SNAPSHOT'
 
 apply plugin: 'spring-boot'
 apply plugin: "com.zoltu.git-versioning"
+apply plugin: "com.palantir.docker"
 
 buildscript {
     ext {
@@ -17,12 +17,22 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "gradle.plugin.com.zoltu.gradle.plugin:git-versioning:2.0.28"
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.9.0"
     }
 }
 
 jar {
     baseName = 'abcourses'
-    version = '0.0.1-SNAPSHOT'
+    version = ZoltuGitVersioning.versionInfo
+}
+
+docker {
+    name "nektodev/abcources"
+    tags 'latest', "v${ZoltuGitVersioning.versionInfo}"
+    dockerfile 'Dockerfile'
+    dependsOn tasks.jar
+    files "build/libs/abcourses-${ZoltuGitVersioning.versionInfo}.jar"
+    pull true
 }
 
 dependencies {
