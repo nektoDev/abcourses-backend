@@ -1,8 +1,10 @@
 package ru.nektodev.abcourses.facade;
 
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.api.ServiceFacade;
+import ru.nektodev.abcourses.service.UsefulLinksService;
 import ru.nektodev.abcouses.model.UsefulLink;
 
 import java.util.List;
@@ -15,13 +17,16 @@ import java.util.List;
 @AutoJsonRpcServiceImpl
 public class ServiceFacadeImpl implements ServiceFacade{
 
+    @Autowired
+    private UsefulLinksService usefulLinksService;
+
     @Override
     public List<UsefulLink> listUsefulLinks() {
-        return null;
+        return usefulLinksService.listUsefulLinks();
     }
 
     @Override
     public List<UsefulLink> saveUsefulLinks(List<UsefulLink> links) {
-        return null;
+        return usefulLinksService.saveLinks(links);
     }
 }
