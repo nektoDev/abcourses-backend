@@ -33,7 +33,7 @@ docker {
     name "nektodev/abcourses-backend"
     tags 'latest'
     dockerfile 'Dockerfile'
-    dependsOn tasks.clean, tasks.build
+    dependsOn tasks.jar, tasks.bootRepackage
     pull true
 }
 
