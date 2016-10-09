@@ -2,6 +2,7 @@ package ru.nektodev.abcourses.api;
 
 import com.googlecode.jsonrpc4j.JsonRpcService;
 import ru.nektodev.abcourses.api.model.ProgressChartResponse;
+import ru.nektodev.abcourses.api.model.StudentListResponse;
 import ru.nektodev.abcouses.model.Student;
 import ru.nektodev.abcouses.model.StudentProgress;
 
@@ -28,6 +29,8 @@ public interface StudentFacade extends BaseFacade<Student> {
 
     @Override
     void delete(List<String> students);
+
+    StudentListResponse listStudents();
 
     StudentProgress getProgress(String student);
 

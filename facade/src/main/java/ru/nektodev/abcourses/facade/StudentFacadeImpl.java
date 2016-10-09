@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.api.StudentFacade;
 import ru.nektodev.abcourses.api.model.ProgressChartResponse;
 import ru.nektodev.abcourses.api.model.ProgressChartValue;
+import ru.nektodev.abcourses.api.model.StudentListResponse;
+import ru.nektodev.abcourses.api.model.StudentListResponseItem;
 import ru.nektodev.abcourses.service.ProgressService;
 import ru.nektodev.abcourses.service.StudentService;
 import ru.nektodev.abcouses.model.ProgressData;
@@ -16,6 +18,7 @@ import ru.nektodev.abcouses.model.StudentProgress;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author nektodev
@@ -54,6 +57,13 @@ public class StudentFacadeImpl implements StudentFacade {
     @Override
     public void delete(List<String> students) {
         studentService.delete(students);
+    }
+
+    @Override
+    public StudentListResponse listStudents() {
+        return new StudentListResponse(studentService.list().stream()
+                .map(StudentListResponseItem::new)
+                .collect(Collectors.toList()));
     }
 
     @Override
