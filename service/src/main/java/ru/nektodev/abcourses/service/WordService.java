@@ -57,6 +57,9 @@ public class WordService {
         List<Word> toSave = new ArrayList<>();
         for (Word word : words) {
             Word repoWord = getOrCreateWord(word.getId(), studentId, new Date());
+            if (repoWord.getCountUses().get(studentId) > 1) {
+                repoWord.getCountUses().put(studentId, repoWord.getCountUses().get(studentId)-1);
+            }
             repoWord.getTranslations().addAll(word.getTranslations());
             toSave.add(repoWord);
         }
