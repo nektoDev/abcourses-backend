@@ -120,7 +120,7 @@ public class StudentService {
     private Integer getUniqueWordsCount(Collection<String> words) {
         Set<String> uniqueWords = new HashSet<>();
         for (String word : words) {
-            word = word.replaceAll(" |,|\\.|;", "");
+            word = word.replaceAll(",|\\.|;", "").trim();
             if (word.contains(" ")) {
                 Collections.addAll(uniqueWords, word.split(" "));
             }
