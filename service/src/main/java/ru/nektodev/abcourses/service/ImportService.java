@@ -117,7 +117,7 @@ public class ImportService {
         List<HomeworkWord> pronunciation = new ArrayList<>();
 
         questionAnswerMap.forEach((question, answer) -> {
-            Word word = getOrCreateWord(question, student.getId(), new Date());
+            Word word = wordService.getOrCreateWord(question, student.getId(), new Date());
             word.getPronunciations().put(student.getDialect(), answer);
 
             pronunciation.add(createHomeworkWord(pronunciation.size(), question, answer, word.getId()));
@@ -134,7 +134,7 @@ public class ImportService {
         List<HomeworkWord> vocabulary = new ArrayList<>();
 
         questionAnswerMap.forEach((question, answer) -> {
-            Word word = getOrCreateWord(answer, student.getId(), new Date());
+            Word word = wordService.getOrCreateWord(answer, student.getId(), new Date());
             word.getTranslations().add(question);
 
             vocabulary.add(createHomeworkWord(vocabulary.size(), question, answer, word.getId()));
@@ -156,19 +156,6 @@ public class ImportService {
         return word;
     }
 
-    private Word getOrCreateWord(String id, String studentId, Date date) {
-        Word word = wordService.get(id);
-        if (word == null) {
-            word = new Word(studentId, id);
-        }
-
-        word.getFirstAppeared().putIfAbsent(studentId, date);
-        word.getCountUses().put(studentId, word.getCountUses().getOrDefault(studentId, 0)+1);
-        word.getLastUsed().put(studentId, date);
-
-        return word;
-    }
-
     public void importHomeworks(List<Homework>homeworks) {
         for (Homework homework : homeworks) {
             if (homeworkService.getByHashAndStudent(homework.getFileHash(), homework.getStudentId()) != null)
@@ -178,7 +165,7 @@ public class ImportService {
 
             for (HomeworkWord w : homework.getVocabulary()) {
                 student.getWords().add(w.getWordId());
-                wordService.save(getOrCreateWord(w.getWordId(), student.getId(), homework.getDate()));
+                wordService.save(wordService.getOrCreateWord(w.getWordId(), student.getId(), homework.getDate()));
             }
 
             studentService.save(student);

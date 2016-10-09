@@ -25,4 +25,6 @@ public interface WordFacade extends BaseFacade<Word> {
 
     @Override
     void delete(List<String> tList);
+
+    List<Word> addWordsToStudent(List<Word> words, String studentId);
 }

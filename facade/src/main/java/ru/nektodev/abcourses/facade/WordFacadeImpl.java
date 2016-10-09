@@ -44,4 +44,9 @@ public class WordFacadeImpl implements WordFacade {
     public void delete(List<String> wordIds) {
         wordService.delete(wordIds);
     }
+
+    @Override
+    public List<Word> addWordsToStudent(List<Word> words, String studentId) {
+        return wordService.addWordsToStudent(words, studentId);
+    }
 }
