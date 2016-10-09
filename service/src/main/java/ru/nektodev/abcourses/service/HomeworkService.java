@@ -26,12 +26,16 @@ public class HomeworkService {
     private HomeworkRepository homeworkRepository;
 
     @Autowired
+    private ImportService importService;
+
+    @Autowired
     private WordService wordService;
 
     public List<Homework> save(List<Homework> homeworks) {
         homeworks.forEach(h -> h.setDate(truncateDate(h.getDate())));
         LOG.debug("Save Homeworks: " + homeworks);
-        return homeworkRepository.save(homeworks);
+        importService.importHomeworks(homeworks);
+        return null;
     }
 
     public Homework save(Homework homework) {
