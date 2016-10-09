@@ -155,21 +155,4 @@ public class ImportService {
         word.setWordId(wordId);
         return word;
     }
-
-    public void importHomeworks(List<Homework>homeworks) {
-        for (Homework homework : homeworks) {
-            if (homeworkService.getByHashAndStudent(homework.getFileHash(), homework.getStudentId()) != null)
-                continue;
-
-            Student student = studentService.get(homework.getStudentId());
-
-            for (HomeworkWord w : homework.getVocabulary()) {
-                student.getWords().add(w.getWordId());
-                wordService.save(wordService.getOrCreateWord(w.getWordId(), student.getId(), homework.getDate()));
-            }
-
-            studentService.save(student);
-            homeworkService.save(homework);
-        }
-    }
 }
