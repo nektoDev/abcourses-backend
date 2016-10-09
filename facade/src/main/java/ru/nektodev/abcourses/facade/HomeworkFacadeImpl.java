@@ -7,6 +7,7 @@ import ru.nektodev.abcourses.api.HomeworkFacade;
 import ru.nektodev.abcourses.api.model.HomeworkResponse;
 import ru.nektodev.abcourses.service.HomeworkService;
 import ru.nektodev.abcouses.model.Homework;
+import ru.nektodev.abcouses.model.HomeworkWord;
 
 import java.util.Date;
 import java.util.List;
@@ -59,24 +60,28 @@ public class HomeworkFacadeImpl implements HomeworkFacade {
     @Override
     public HomeworkResponse getVocabulary(String studentId) {
         Homework studentHomework = homeworkService.getStudentHomework(studentId, null);
-        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getVocabulary());
+        List<HomeworkWord> words = homeworkService.enrichHomeworkWords(studentHomework.getVocabulary());
+        return new HomeworkResponse(studentHomework.getDate(), words);
     }
 
     @Override
     public HomeworkResponse getVocabulary(String studentId, Long date) {
         Homework studentHomework = homeworkService.getStudentHomework(studentId, new Date(date));
-        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getVocabulary());
+        List<HomeworkWord> words = homeworkService.enrichHomeworkWords(studentHomework.getVocabulary());
+        return new HomeworkResponse(studentHomework.getDate(), words);
     }
 
     @Override
     public HomeworkResponse getPronunciation(String studentId) {
         Homework studentHomework = homeworkService.getStudentHomework(studentId, null);
-        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getPronunciation());
+        List<HomeworkWord> words = homeworkService.enrichHomeworkWords(studentHomework.getPronunciation());
+        return new HomeworkResponse(studentHomework.getDate(), words);
     }
 
     @Override
     public HomeworkResponse getPronunciation(String studentId, Long date) {
         Homework studentHomework = homeworkService.getStudentHomework(studentId, new Date(date));
-        return new HomeworkResponse(studentHomework.getDate(), studentHomework.getPronunciation());
+        List<HomeworkWord> words = homeworkService.enrichHomeworkWords(studentHomework.getPronunciation());
+        return new HomeworkResponse(studentHomework.getDate(), words);
     }
 }

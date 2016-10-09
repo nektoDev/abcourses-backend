@@ -2,11 +2,11 @@ package ru.nektodev.abcourses.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.JodaTimeConverters;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.repository.HomeworkRepository;
 import ru.nektodev.abcouses.model.Homework;
+import ru.nektodev.abcouses.model.HomeworkWord;
 
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -25,7 +25,8 @@ public class HomeworkService {
     @Autowired
     private HomeworkRepository homeworkRepository;
 
-    private JodaTimeConverters.DateToLocalDateConverter toLocaldateConverter;
+    @Autowired
+    private WordService wordService;
 
     public List<Homework> save(List<Homework> homeworks) {
         homeworks.forEach(h -> h.setDate(truncateDate(h.getDate())));
@@ -71,6 +72,11 @@ public class HomeworkService {
             return homeworkRepository.findByStudentId(studentId, new Sort(Sort.Direction.DESC, "date"));
         }
         return homeworkRepository.findByStudentIdAndDate(studentId, truncateDate(date));
+    }
+
+    public List<HomeworkWord> enrichHomeworkWords(List<HomeworkWord> words) {
+        words.forEach((w) -> w.setWordData(wordService.get(w.getWordId())));
+        return words;
     }
 
 

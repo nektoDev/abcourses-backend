@@ -2,6 +2,7 @@ package ru.nektodev.abcouses.model;
 
 import com.google.common.base.Objects;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 
@@ -15,6 +16,8 @@ public class HomeworkWord implements Serializable {
     private String question;
     private String answer;
     private String wordId;
+    @Transient
+    private Word wordData;
 
     public HomeworkWord() {
     }
@@ -84,5 +87,13 @@ public class HomeworkWord implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Word getWordData() {
+        return wordData;
+    }
+
+    public void setWordData(Word wordData) {
+        this.wordData = wordData;
     }
 }
