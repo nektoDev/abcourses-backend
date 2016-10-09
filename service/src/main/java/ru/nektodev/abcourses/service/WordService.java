@@ -36,4 +36,14 @@ public class WordService {
     public List<Word> list() {
         return wordRepository.findAll();
     }
+
+    public List<Word> merge(List<Word> words) {
+        return wordRepository.save(words);
+    }
+
+    public void delete(List<String> wordIds) {
+        for (String wordId : wordIds) {
+            wordRepository.delete(wordId);
+        }
+    }
 }
