@@ -84,4 +84,8 @@ public class WordService {
 
         return word;
     }
+
+    public List<Word> getWordsByStudent(String studentId) {
+        return wordRepository.findAll().stream().filter(w -> w.getCountUses().containsKey(studentId)).collect(Collectors.toList());
+    }
 }

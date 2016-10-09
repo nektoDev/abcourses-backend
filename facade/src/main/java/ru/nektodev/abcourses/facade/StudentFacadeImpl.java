@@ -5,15 +5,13 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nektodev.abcourses.api.StudentFacade;
-import ru.nektodev.abcourses.api.model.ProgressChartResponse;
-import ru.nektodev.abcourses.api.model.ProgressChartValue;
-import ru.nektodev.abcourses.api.model.StudentListResponse;
-import ru.nektodev.abcourses.api.model.StudentListResponseItem;
+import ru.nektodev.abcourses.api.model.*;
 import ru.nektodev.abcourses.service.ProgressService;
 import ru.nektodev.abcourses.service.StudentService;
 import ru.nektodev.abcouses.model.ProgressData;
 import ru.nektodev.abcouses.model.Student;
 import ru.nektodev.abcouses.model.StudentProgress;
+import ru.nektodev.abcouses.model.StudentStatistics;
 
 import java.util.Date;
 import java.util.List;
@@ -99,5 +97,10 @@ public class StudentFacadeImpl implements StudentFacade {
         response.setProgressDateValuesMap(progressDateValuesMap);
 
         return response;
+    }
+
+    @Override
+    public StudentStatistics getStudentStatistics(String student) {
+        return studentService.getStudentStatistics(student);
     }
 }

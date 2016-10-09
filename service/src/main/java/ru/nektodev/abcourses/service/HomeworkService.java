@@ -79,6 +79,9 @@ public class HomeworkService {
         return words;
     }
 
+    public List<Homework> listStudentHomeworks(String studentId) {
+        return homeworkRepository.findAllByStudentId(studentId);
+    }
 
     private Date truncateDate(Date date) {
         return Date.from(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC));
