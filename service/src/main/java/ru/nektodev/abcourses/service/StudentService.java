@@ -101,18 +101,38 @@ public class StudentService {
         result.setTopVocabularyCount(vocabularyTop.size());
         result.setTopPronunciationCount(pronunciationTop.size());
 
-        result.setAvgVocabularyScore(progress.getVocabulary().stream()
+        Double avgVocabularyScore = progress.getVocabulary().stream()
                 .map(ProgressData::getValue)
-                .collect(Collectors.averagingDouble(Double::new))
-                .toString());
-        result.setAvgPronunciationScore(progress.getPronunciation().stream()
+                .collect(Collectors.averagingDouble(Double::new));
+        Double avgVocabularyScoreDif = avgVocabularyScore - progress.getVocabulary().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .skip(1)
                 .map(ProgressData::getValue)
-                .collect(Collectors.averagingDouble(Double::new))
-                .toString());
-        result.setAvgTestScore(progress.getTest().stream()
+                .collect(Collectors.averagingDouble(Double::new));
+        result.setAvgVocabularyScore(avgVocabularyScore.toString());
+        result.setAvgVocabularyScoreDif(avgVocabularyScoreDif.toString());
+
+        Double avgPronunciationScore = progress.getPronunciation().stream()
                 .map(ProgressData::getValue)
-                .collect(Collectors.averagingDouble(Double::new))
-                .toString());
+                .collect(Collectors.averagingDouble(Double::new));
+        Double avgPronunciationScoreDif = avgPronunciationScore - progress.getPronunciation().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .skip(1)
+                .map(ProgressData::getValue)
+                .collect(Collectors.averagingDouble(Double::new));
+        result.setAvgPronunciationScore(avgPronunciationScore.toString());
+        result.setAvgPronunciationScoreDif(avgPronunciationScoreDif.toString());
+
+        Double avgTestScore = progress.getTest().stream()
+                .map(ProgressData::getValue)
+                .collect(Collectors.averagingDouble(Double::new));
+        Double avgTestScoreDif = avgTestScore - progress.getTest().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .skip(1)
+                .map(ProgressData::getValue)
+                .collect(Collectors.averagingDouble(Double::new));
+        result.setAvgTestScore(avgTestScore.toString());
+        result.setAvgTestScoreDif(avgTestScoreDif.toString());
 
         return result;
     }

@@ -13,16 +13,24 @@ public class StudentStatistics {
 
     private Integer wordsCount;
     private Integer uniqueWordsCount;
+
     private Integer homeworksCount;
     private Integer testCount;
+
     private Integer topScoreCount;
     private Integer topVocabularyCount;
     private Integer topPronunciationCount;
+
     private String avgVocabularyWordsCount;
     private String avgPronunciationWordsCount;
+
     private String avgVocabularyScore;
+    private String avgVocabularyScoreDif;
     private String avgPronunciationScore;
+    private String avgPronunciationScoreDif;
     private String avgTestScore;
+    private String avgTestScoreDif;
+
     private List<Word> mostFrequentWords;
 
     @Override
@@ -39,8 +47,11 @@ public class StudentStatistics {
                 .add("avgVocabularyWordsCount", avgVocabularyWordsCount)
                 .add("avgPronunciationWordsCount", avgPronunciationWordsCount)
                 .add("avgVocabularyScore", avgVocabularyScore)
+                .add("avgVocabularyScoreDif", avgVocabularyScoreDif)
                 .add("avgPronunciationScore", avgPronunciationScore)
+                .add("avgPronunciationScoreDif", avgPronunciationScoreDif)
                 .add("avgTestScore", avgTestScore)
+                .add("avgTestScoreDif", avgTestScoreDif)
                 .add("mostFrequentWords", mostFrequentWords)
                 .toString();
     }
@@ -61,14 +72,17 @@ public class StudentStatistics {
                 Objects.equal(avgVocabularyWordsCount, that.avgVocabularyWordsCount) &&
                 Objects.equal(avgPronunciationWordsCount, that.avgPronunciationWordsCount) &&
                 Objects.equal(avgVocabularyScore, that.avgVocabularyScore) &&
+                Objects.equal(avgVocabularyScoreDif, that.avgVocabularyScoreDif) &&
                 Objects.equal(avgPronunciationScore, that.avgPronunciationScore) &&
+                Objects.equal(avgPronunciationScoreDif, that.avgPronunciationScoreDif) &&
                 Objects.equal(avgTestScore, that.avgTestScore) &&
+                Objects.equal(avgTestScoreDif, that.avgTestScoreDif) &&
                 Objects.equal(mostFrequentWords, that.mostFrequentWords);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(student, wordsCount, uniqueWordsCount, homeworksCount, testCount, topScoreCount, topVocabularyCount, topPronunciationCount, avgVocabularyWordsCount, avgPronunciationWordsCount, avgVocabularyScore, avgPronunciationScore, avgTestScore, mostFrequentWords);
+        return Objects.hashCode(student, wordsCount, uniqueWordsCount, homeworksCount, testCount, topScoreCount, topVocabularyCount, topPronunciationCount, avgVocabularyWordsCount, avgPronunciationWordsCount, avgVocabularyScore, avgVocabularyScoreDif, avgPronunciationScore, avgPronunciationScoreDif, avgTestScore, avgTestScoreDif, mostFrequentWords);
     }
 
     public String getStudent() {
@@ -181,5 +195,29 @@ public class StudentStatistics {
 
     public void setTopPronunciationCount(Integer topPronunciationCount) {
         this.topPronunciationCount = topPronunciationCount;
+    }
+
+    public String getAvgVocabularyScoreDif() {
+        return avgVocabularyScoreDif;
+    }
+
+    public void setAvgVocabularyScoreDif(String avgVocabularyScoreDif) {
+        this.avgVocabularyScoreDif = avgVocabularyScoreDif;
+    }
+
+    public String getAvgPronunciationScoreDif() {
+        return avgPronunciationScoreDif;
+    }
+
+    public void setAvgPronunciationScoreDif(String avgPronunciationScoreDif) {
+        this.avgPronunciationScoreDif = avgPronunciationScoreDif;
+    }
+
+    public String getAvgTestScoreDif() {
+        return avgTestScoreDif;
+    }
+
+    public void setAvgTestScoreDif(String avgTestScoreDif) {
+        this.avgTestScoreDif = avgTestScoreDif;
     }
 }
