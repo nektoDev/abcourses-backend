@@ -60,6 +60,9 @@ public class PDFProgressParser extends AbstractProgressParser {
 
                         if (elements.length >= params.getTestColumn() + 1)
                             result.addTestIfNotNull(getProgressData(date, elements[params.getTestColumn()]));
+
+                        if (elements.length >= params.getGrammarColumn() + 1)
+                            result.addGrammarIfNotNull(getProgressData(date, elements[params.getGrammarColumn()]));
                     } catch (ParseException ignored) {
                     }
                 }

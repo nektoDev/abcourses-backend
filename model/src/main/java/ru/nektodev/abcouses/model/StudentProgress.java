@@ -18,16 +18,18 @@ public class StudentProgress implements Serializable {
     private List<ProgressData> vocabulary;
     private List<ProgressData> pronunciation;
     private List<ProgressData> test;
+    private List<ProgressData> grammar;
     private Date updateDate;
 
     public StudentProgress() {
     }
 
-    public StudentProgress(String studentId, List<ProgressData> vocabulary, List<ProgressData> pronunciation, List<ProgressData> test, Date updateDate) {
+    public StudentProgress(String studentId, List<ProgressData> vocabulary, List<ProgressData> pronunciation, List<ProgressData> test, List<ProgressData> grammar, Date updateDate) {
         this.studentId = studentId;
         this.vocabulary = vocabulary;
         this.pronunciation = pronunciation;
         this.test = test;
+        this.grammar = grammar;
         this.updateDate = updateDate;
     }
 
@@ -36,6 +38,7 @@ public class StudentProgress implements Serializable {
         this.vocabulary = parsedData.getVocabulary();
         this.pronunciation = parsedData.getPronunciation();
         this.test = parsedData.getTest();
+        this.grammar = parsedData.getGrammar();
         this.updateDate = updateDate;
     }
 
@@ -47,6 +50,7 @@ public class StudentProgress implements Serializable {
                 .add("vocabulary", vocabulary)
                 .add("pronunciation", pronunciation)
                 .add("test", test)
+                .add("grammar", grammar)
                 .add("updateDate", updateDate)
                 .toString();
     }
@@ -60,12 +64,13 @@ public class StudentProgress implements Serializable {
                 Objects.equal(vocabulary, that.vocabulary) &&
                 Objects.equal(pronunciation, that.pronunciation) &&
                 Objects.equal(test, that.test) &&
+                Objects.equal(grammar, that.grammar) &&
                 Objects.equal(updateDate, that.updateDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(studentId, vocabulary, pronunciation, test, updateDate);
+        return Objects.hashCode(studentId, vocabulary, pronunciation, test, grammar, updateDate);
     }
 
     public List<ProgressData> getPronunciation() {
@@ -108,5 +113,13 @@ public class StudentProgress implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<ProgressData> getGrammar() {
+        return grammar;
+    }
+
+    public void setGrammar(List<ProgressData> grammar) {
+        this.grammar = grammar;
     }
 }

@@ -15,11 +15,13 @@ public class ParsedProgressData implements Serializable {
     private List<ProgressData> vocabulary;
     private List<ProgressData> pronunciation;
     private List<ProgressData> test;
+    private List<ProgressData> grammar;
 
     public ParsedProgressData() {
         this.vocabulary = new ArrayList<>();
         this.pronunciation = new ArrayList<>();
         this.test = new ArrayList<>();
+        this.grammar = new ArrayList<>();
     }
 
     public void addVocabularyIfNotNull(ProgressData pd) {
@@ -40,12 +42,19 @@ public class ParsedProgressData implements Serializable {
         }
     }
 
+    public void addGrammarIfNotNull(ProgressData pd) {
+        if (pd != null) {
+            this.grammar.add(pd);
+        }
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("vocabulary", vocabulary)
                 .add("pronunciation", pronunciation)
                 .add("test", test)
+                .add("grammar", grammar)
                 .toString();
     }
 
@@ -56,12 +65,13 @@ public class ParsedProgressData implements Serializable {
         ParsedProgressData that = (ParsedProgressData) o;
         return Objects.equal(vocabulary, that.vocabulary) &&
                 Objects.equal(pronunciation, that.pronunciation) &&
+                Objects.equal(grammar, that.grammar) &&
                 Objects.equal(test, that.test);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(vocabulary, pronunciation, test);
+        return Objects.hashCode(vocabulary, pronunciation, test, grammar);
     }
 
     public List<ProgressData> getVocabulary() {
@@ -87,5 +97,13 @@ public class ParsedProgressData implements Serializable {
 
     public void setTest(List<ProgressData> test) {
         this.test = test;
+    }
+
+    public List<ProgressData> getGrammar() {
+        return grammar;
+    }
+
+    public void setGrammar(List<ProgressData> grammar) {
+        this.grammar = grammar;
     }
 }

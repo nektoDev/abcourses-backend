@@ -10,6 +10,7 @@ public class ProgressChartValue {
     private Integer vocabulary;
     private Integer pronunciation;
     private Integer test;
+    private Integer grammar;
 
     @Override
     public String toString() {
@@ -17,6 +18,7 @@ public class ProgressChartValue {
                 .add("vocabulary", vocabulary)
                 .add("pronunciation", pronunciation)
                 .add("test", test)
+                .add("grammar", grammar)
                 .toString();
     }
 
@@ -27,12 +29,13 @@ public class ProgressChartValue {
         ProgressChartValue that = (ProgressChartValue) o;
         return Objects.equal(vocabulary, that.vocabulary) &&
                 Objects.equal(pronunciation, that.pronunciation) &&
+                Objects.equal(grammar, that.grammar) &&
                 Objects.equal(test, that.test);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(vocabulary, pronunciation, test);
+        return Objects.hashCode(vocabulary, pronunciation, test, grammar);
     }
 
     public Integer getVocabulary() {
@@ -57,5 +60,13 @@ public class ProgressChartValue {
 
     public void setTest(Integer test) {
         this.test = test;
+    }
+
+    public Integer getGrammar() {
+        return grammar;
+    }
+
+    public void setGrammar(Integer grammar) {
+        this.grammar = grammar;
     }
 }

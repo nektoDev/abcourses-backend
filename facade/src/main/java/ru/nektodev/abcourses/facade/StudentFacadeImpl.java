@@ -93,6 +93,12 @@ public class StudentFacadeImpl implements StudentFacade {
             progressDateValuesMap.putIfAbsent(progressData.getDate(), chartValue);
         }
 
+        for (ProgressData progressData : studentProgress.getGrammar()) {
+            ProgressChartValue chartValue = progressDateValuesMap.getOrDefault(progressData.getDate(), new ProgressChartValue());
+            chartValue.setGrammar(progressData.getValue());
+            progressDateValuesMap.putIfAbsent(progressData.getDate(), chartValue);
+        }
+
         ProgressChartResponse response = new ProgressChartResponse();
         response.setProgressDateValuesMap(progressDateValuesMap);
 

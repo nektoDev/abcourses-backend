@@ -47,6 +47,9 @@ public class ODSProgressParser extends AbstractProgressParser {
 
                 if (cells.length >= params.getTestColumn() + 1)
                     result.addTestIfNotNull(getProgressData(date, cells[params.getTestColumn()].getFullText()));
+
+                if (cells.length >= params.getGrammarColumn() + 1)
+                    result.addGrammarIfNotNull(getProgressData(date, cells[params.getGrammarColumn()].getFullText()));
             } catch (ParseException ignored) {
             }
         }

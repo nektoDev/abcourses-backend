@@ -15,6 +15,7 @@ public class ProgressImportParams implements Serializable {
     private Integer vocabularyColumn;
     private Integer pronunciationColumn;
     private Integer testColumn;
+    private Integer grammarColumn;
 
     @Override
     public String toString() {
@@ -25,6 +26,7 @@ public class ProgressImportParams implements Serializable {
                 .add("vocabularyColumn", vocabularyColumn)
                 .add("pronunciationColumn", pronunciationColumn)
                 .add("testColumn", testColumn)
+                .add("grammarColumn", grammarColumn)
                 .toString();
     }
 
@@ -38,12 +40,13 @@ public class ProgressImportParams implements Serializable {
                 Objects.equal(dateColumn, that.dateColumn) &&
                 Objects.equal(vocabularyColumn, that.vocabularyColumn) &&
                 Objects.equal(pronunciationColumn, that.pronunciationColumn) &&
-                Objects.equal(testColumn, that.testColumn);
+                Objects.equal(testColumn, that.testColumn) &&
+                Objects.equal(grammarColumn, that.grammarColumn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(progressPath, type, dateColumn, vocabularyColumn, pronunciationColumn, testColumn);
+        return Objects.hashCode(progressPath, type, dateColumn, vocabularyColumn, pronunciationColumn, testColumn, grammarColumn);
     }
 
     public void setVocabularyColumn(Integer vocabularyColumn) {
@@ -93,5 +96,13 @@ public class ProgressImportParams implements Serializable {
 
     public void setType(ProgressType type) {
         this.type = type;
+    }
+
+    public Integer getGrammarColumn() {
+        return grammarColumn;
+    }
+
+    public void setGrammarColumn(Integer grammarColumn) {
+        this.grammarColumn = grammarColumn;
     }
 }
