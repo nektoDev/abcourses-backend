@@ -19,7 +19,7 @@ public class ImportSheduler {
     @Scheduled(cron="${scheduler.import.cron}")
     public void importAllStudents() {
         LOG.info("Start scheduled import.");
-        importService.doImport();
+        importService.doImport(false);
         importService.doImportProgress();
         LOG.info("Scheduled import completed");
     }

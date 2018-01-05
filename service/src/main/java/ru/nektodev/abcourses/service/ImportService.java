@@ -49,11 +49,11 @@ public class ImportService {
         parserFactory = new ProgressParserFactory();
     }
 
-    public void doImport() {
-        studentService.list().forEach(s -> doImport(s.getId()));
+    public void doImport(boolean force) {
+        studentService.list().forEach(s -> doImport(s.getId(), force));
     }
 
-    public void doImport(String studentId) {
+    public void doImport(String studentId, boolean force) {
         Student student = getStudent(studentId);
 
         try {
@@ -63,7 +63,7 @@ public class ImportService {
 
             String hash = FileUtils.calculateFileHash(pronunciationFile) + FileUtils.calculateFileHash(vocabularyFile);
 
-            if (homeworkService.isHomeworkExist(hash, student.getId())) {
+            if (!force && homeworkService.isHomeworkExist(hash, student.getId())) {
                 LOG.debug(String.format("%s's homework %s has already been imported.", student.getId(), hash));
                 return;
             }
